@@ -1,0 +1,15 @@
+version: "2"
+services:
+    test:
+        environment:
+          - uuidsecretanalytics
+          - zidburiwrite
+        build:
+            context: .
+            dockerfile: tests/Dockerfile
+        image: ziwebcounter:test
+    release:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: zidatasciencecontainer.azurecr.io/zi/ziwebcounter:compose
