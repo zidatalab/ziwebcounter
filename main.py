@@ -7,11 +7,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from typing import Optional
 from pymongo import MongoClient
-import uuid
-from zicredentials import get_zi_secret
+import uuid,os
 
 # Config
-uuidsalt = uuid.UUID(get_zi_secret('uuidsecretanalytics'))
+uuidsalt = os.getenv('uuidsecretanalytics')
 app = FastAPI(
     title="Zi Analytics Webcounter",
     version="1.0.0")
@@ -25,7 +24,7 @@ app.add_middleware(
 )
 
 # connect to MongoDB
-mongodburi = get_zi_secret("zidburiwrite")
+mongodburi = os.getenv("zidburiwrite")
 db = MongoClient(mongodburi).get_database('webtools')
 collection = db.webcounter
 

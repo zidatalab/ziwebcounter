@@ -1,7 +1,6 @@
-azure-keyvault
 fastapi
-msrestazure
 pymongo
 pytest
 uvicorn
 aiofiles
+requests

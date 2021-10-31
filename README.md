@@ -1,6 +1,11 @@
-# Simple webcounte with fastapi
+# Zi Web Counter
 
-This should provide a simple web counter solution via docker. API is implemented in fastapi, db is MongoDB and the counter itself is implemented via a count pixel.
+This is a simple dockerized web counter solution. Based on the Stack Docker, Python, Fastapi, MongoDB. API is implemented in fastapi, the db Backend is MongoDB and the counter itself is implemented via a get request for a count pixel.
+
+We provide sample HTML implementations using /[Sample.html](sample.html).
+
+**User Privacy** is ensured via hash based Host+Agent annomymization. For implementation details see `makeuuid` in [main.py](main.py).
+
 
 ## Manual Installation
 
@@ -23,6 +28,7 @@ For local testing, a .env file needs to be created and cocker-compose.yml needs 
 ## Test
 
 `docker-compose build test`
+
 `docker-compose run --rm test`
 
 ## Release
