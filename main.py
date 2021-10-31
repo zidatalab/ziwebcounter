@@ -15,7 +15,7 @@ from pymongo.compression_support import decompress
 uuidsalt = uuid.UUID(os.getenv('uuidsecretanalytics'))
 app = FastAPI(
     title="Zi Analytics Webcounter",
-    version="1.0.0")
+    version="1.1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -68,7 +68,8 @@ def endpointstatus():
 @app.get("/view/{siteid}/{filename}")
 def report_view(siteid:str,request: Request,response: Response, pageid:Optional[str]="none",filename:Optional[str]=""):
     '''
-    Collects annonymous stats. If user has visited us before, the id from a stored cookie will be used.
+    Collects annonymous stats. If user has visited us before, the id from a stored cookie will be used. 
+    Local cookie invalidates after 365 days of not visiting a site using this service.
     '''
     try:
         query,visit=analyzerequest(request,pageid,siteid)
@@ -76,7 +77,7 @@ def report_view(siteid:str,request: Request,response: Response, pageid:Optional[
             print('found uid:',request.cookies['uid'])
             query['user']=request.cookies['uid']
         res = collection.update_one(query,{'$push': {'visits': visit}},upsert=True)
-        response.set_cookie(key='uid',value=query['user'],samesite="lax",expires=365*24*60*60,httponly=True,secure=True)
+        response.set_cookie(key='uid',value=query['user'],samesite="lax",expires=365*24*60*60, httponly=True,secure=True)
         if (filename=='counter.png'):
             return FileResponse("counter.png")
         else:
