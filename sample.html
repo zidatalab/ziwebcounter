@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+<title>Sample HTML page with web counter implementation</title>
+</head>
+<body style="padding:40px;max-width:800px;background-color: white;color: darkslategrey;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <h1>Sample HTML page with web counter implementation</h1>
+    <h3>Request:</h3>
+    <p id="sendinfo"></p>
+    <h3 id="sendresultheader"></h3>
+    <p id="sendresult"></p>
+    <h1>Code Snippets</h1>
+    <p>
+        Javascript counter is the suggested method. I the counte is not working, pls. try count img tag.
+    </p>
+    <h3>For javascript</h3>
+    <div style="line-height: 1.1rem;font-size: larger;color:white;background-color: lightslategrey;margin:15px;border-radius: 15px;">
+    <p >
+        <pre><code>
+            // Begin of Zi anonymous web Analytics script, no IP is recorded
+
+            &lt;script type="text/javascript"&gt;                
+                // Put your values here:
+                let trackerurl = "http://localhost:8000/view/";
+                let sitename = "testname"
+                // Do not change anything below
+                let docName = window.location.pathname;
+                let _thequery = trackerurl+sitename+'/data?pageid='+docName;                
+                // Execute Request 
+                const Http = new XMLHttpRequest();
+                Http.open("GET", _thequery);
+                Http.send();
+            &lt;/script&gt;
+            
+            // End of Zi anonymous web Analytics script
+
+        </code></pre>
+    </p>
+    </div>
+    <h3>Without javascript using img count pixel</h3>
+    <div style="line-height: 1.1rem;font-size: larger;color:white;background-color: lightslategrey;margin:15px;border-radius: 15px;">
+    <p >
+        <pre><code>
+            // Begin of Zi anonymous web Analytics using img counter, no IP is recorded
+            // Please edit values in the URI, "testpixel" to yourprojectname and /test.html 
+            // to yout pagename.
+
+            &lt;noscript&gt;                
+                &lt;img src="http://localhost:8000/view/testpixel/counter.png?pageid="/test.html" 
+                style="border:0" alt=""&gt;
+            &lt;/noscript&gt;         
+
+            // End of Zi anonymous web Analytics using img counter
+        </code></pre>
+    </p>
+    </div>
+</body>
+
+
+<script type="text/javascript">
+    // Put your values here:
+    let trackerurl = "http://localhost:8000/view/";
+    let sitename = "testname"
+    // Do not change anything below this line
+    // ======================================
+    let docName = window.location.pathname;
+    let thequery = trackerurl+sitename+'/data?pageid='+docName;
+    // Uncomment for Testing
+    document.getElementById("sendinfo").innerHTML = thequery;    
+    // Execute Request 
+    const Http = new XMLHttpRequest();
+    Http.open("GET", thequery);
+    Http.send();
+    // Request Debug uncomment for testing
+    Http.onreadystatechange = (e) => {
+        document.getElementById("sendresultheader").innerHTML = "Result:";
+        document.getElementById("sendresult").innerHTML = Http.responseText;
+    }
+</script>
+<noscript>
+    // Begin of Zi anonymous web Analytics using img counter, no IP is recorded
+    // Please edit values in the URI, "testpixel" to yourprojectname and /test.html to yout pagename.
+    <img src="http://localhost:8000/view/testpixel/counter.png?pageid=/test.html" style="border:0" alt="">    
+</noscript>
