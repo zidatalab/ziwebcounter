@@ -6,19 +6,24 @@ from main import app
 client = TestClient(app)
 
 
-# def test_captcha():
-
-#     # generate captcha
-#     res = client.post("/generate_captcha/")
-#     assert res.status_code == 200
-#     captcha_id = re.sub("^inline; filename=\"|\.png\"$", "", res.headers["content-disposition"])
+def test_1_test_status():
+    '''
+    Checks if DB connection is established
+    '''
+    res = client.get("/")
+    assert res.status_code == 200
     
-#     # send true captcha_id but wrong label
-#     res = client.post("/validate_captcha_response/", json = {"captcha_id": captcha_id, "captcha_label": "fake"})
-#     assert res.status_code == 403
+# def test_2_test_view_without_img():
+#     '''
+#     Checks if View can be submitted
+#     '''
+#     res = client.get("/view/testname/data?pageid=/builtest.html")
+#     assert res.status_code == 200
 
-#     # send wrong captcha_id and wrong label
-#     res = client.post("/validate_captcha_response/", json = {"captcha_id": captcha_id + "fake", "captcha_label": "fake"})
-#     assert res.status_code == 404
-
-
+# def test_3_test_view_with_img():
+#     '''
+#     Checks if View can be submitted
+#     '''
+#     res = client.get("/view/testname/counter.png?pageid=/builtest.html")
+#     print(res)
+#     assert res.status_code == 200
