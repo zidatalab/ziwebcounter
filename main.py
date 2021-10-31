@@ -10,7 +10,7 @@ from pymongo import MongoClient
 import uuid,os
 
 # Config
-uuidsalt = os.getenv('uuidsecretanalytics')
+uuidsalt = uuid.UUID(os.getenv('uuidsecretanalytics'))
 app = FastAPI(
     title="Zi Analytics Webcounter",
     version="1.0.0")
@@ -37,11 +37,10 @@ def makeuuid(ip,agent):
     A random namespace is not used, to ensure user stability over different analytics endpoints 
     at the same time.
     '''
-    global mynamesspace
     return str(uuid.uuid3(uuidsalt,ip+agent))
 
 def makeanalyticsentry(ip,agent,pageid,siteid,referer):
-    entry = {'user':makeuuid(ip,agent),'siteid':siteid,'date':str(datetime.date.today())}
+    entry = {'user':makeuuid(ip,agent),'siteid':siteid,'date':str(datetime.date.today())}    
     visits={'pageid':pageid,'timestamp':datetime.datetime.utcnow(),'referer':referer}
     return entry,visits
 
