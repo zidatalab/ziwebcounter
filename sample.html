@@ -28,6 +28,7 @@
                 // Execute Request 
                 const Http = new XMLHttpRequest();
                 Http.open("GET", _thequery);
+                Http.withCredentials=true;
                 Http.send();
             &lt;/script&gt;
             
@@ -68,7 +69,8 @@
     document.getElementById("sendinfo").innerHTML = thequery;    
     // Execute Request 
     const Http = new XMLHttpRequest();
-    Http.open("GET", thequery);
+    Http.open("GET", thequery);    
+    Http.withCredentials=true;
     Http.send();
     // Request Debug uncomment for testing
     Http.onreadystatechange = (e) => {
@@ -79,5 +81,5 @@
 <noscript>
     // Begin of Zi anonymous web Analytics using img counter, no IP is recorded
     // Please edit values in the URI, "testpixel" to yourprojectname and /test.html to yout pagename.
-    <img src="http://localhost:8000/view/testpixel/counter.png?pageid=/test.html" style="border:0" alt="">    
+    <img src="http://localhost:8000/view/testname/counter.png?pageid=/test.html" style="border:0" alt="">    
 </noscript>

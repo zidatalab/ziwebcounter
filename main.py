@@ -1,13 +1,15 @@
 from os import stat
 import datetime
 
-from fastapi import FastAPI, Request,HTTPException,status
+from fastapi import FastAPI, Request,HTTPException,status,Response
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from typing import Optional
 from pymongo import MongoClient
 import uuid,os
+
+from pymongo.compression_support import decompress
 
 # Config
 uuidsalt = uuid.UUID(os.getenv('uuidsecretanalytics'))
@@ -64,13 +66,17 @@ def endpointstatus():
     
 
 @app.get("/view/{siteid}/{filename}")
-def report_view(siteid:str,request: Request,pageid:Optional[str]="none",filename:Optional[str]=""):
+def report_view(siteid:str,request: Request,response: Response, pageid:Optional[str]="none",filename:Optional[str]=""):
     '''
-    Collects annonymous stats
+    Collects annonymous stats. If user has visited us before, the id from a stored cookie will be used.
     '''
     try:
         query,visit=analyzerequest(request,pageid,siteid)
+        if ('uid' in request.cookies.keys()):
+            print('found uid:',request.cookies['uid'])
+            query['user']=request.cookies['uid']
         res = collection.update_one(query,{'$push': {'visits': visit}},upsert=True)
+        response.set_cookie(key='uid',value=query['user'],samesite="lax",expires=365*24*60*60,httponly=True,secure=True)
         if (filename=='counter.png'):
             return FileResponse("counter.png")
         else:
