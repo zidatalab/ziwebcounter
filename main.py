@@ -59,7 +59,7 @@ def endpointstatus():
     '''
     Returns Enpoint Status
     '''
-    if (collection.count()>0):
+    if (collection.estimated_document_count()>0):
         return status.HTTP_200_OK
     else:
         raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE)
@@ -80,5 +80,5 @@ def report_view(siteid:str,request: Request,pageid:Optional[str]="none",filename
     except:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-             detail="Request not formatted properly, see docs."
+            detail="Request not formatted properly, see docs."
         )
