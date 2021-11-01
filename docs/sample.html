@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+
 <head>
-<title>Sample HTML page with web counter implementation</title>
+    <title>Sample HTML page with web counter implementation</title>
 </head>
-<body style="padding:40px;max-width:800px;background-color: white;color: darkslategrey;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+
+<body
+    style="padding:40px;max-width:800px;background-color: white;color: darkslategrey;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
     <h1>Sample HTML page with web counter implementation</h1>
     <h3>Request:</h3>
     <p id="sendinfo"></p>
@@ -10,11 +13,13 @@
     <p id="sendresult"></p>
     <h1>Code Snippets</h1>
     <p>
-        Javascript counter is the suggested method. I the counte is not working, pls. try count img tag.
+        Javascript counter is the suggested method. As a failsafe method, an img-tag can be included in a <code>noscript</code> tag. Either way, to count on a page level, the path and name of the page or an arbitrary id needs to be included as query parameter <code>pageid</code>. Also there is an option to opt out of statistics cookie creation. 
+        This is done via <code>cookiedissent=true</code> as aditional query parameter.
     </p>
     <h3>For javascript</h3>
-    <div style="line-height: 1.1rem;font-size: larger;color:white;background-color: lightslategrey;margin:15px;border-radius: 15px;">
-    <p >
+    <div
+        style="line-height: 1.1rem;font-size: larger;color:white;background-color: lightslategrey;margin:15px;border-radius: 15px;">
+        <p>
         <pre><code>
             // Begin of Zi anonymous web Analytics script, no IP is recorded
 
@@ -35,11 +40,12 @@
             // End of Zi anonymous web Analytics script
 
         </code></pre>
-    </p>
+        </p>
     </div>
     <h3>Without javascript using img count pixel</h3>
-    <div style="line-height: 1.1rem;font-size: larger;color:white;background-color: lightslategrey;margin:15px;border-radius: 15px;">
-    <p >
+    <div
+        style="line-height: 1.1rem;font-size: larger;color:white;background-color: lightslategrey;margin:15px;border-radius: 15px;">
+        <p>
         <pre><code>
             // Begin of Zi anonymous web Analytics using img counter, no IP is recorded
             // Please edit values in the URI, "testpixel" to yourprojectname and /test.html 
@@ -52,7 +58,7 @@
 
             // End of Zi anonymous web Analytics using img counter
         </code></pre>
-    </p>
+        </p>
     </div>
 </body>
 
@@ -64,13 +70,13 @@
     // Do not change anything below this line
     // ======================================
     let docName = window.location.pathname;
-    let thequery = trackerurl+sitename+'/data?pageid='+docName;
+    let thequery = trackerurl + sitename + '/data?pageid=' + docName + "&cookiedissent=true";
     // Uncomment for Testing
-    document.getElementById("sendinfo").innerHTML = thequery;    
+    document.getElementById("sendinfo").innerHTML = thequery;
     // Execute Request 
     const Http = new XMLHttpRequest();
-    Http.open("GET", thequery);    
-    Http.withCredentials=true;
+    Http.open("GET", thequery);
+    Http.withCredentials = true;
     Http.send();
     // Request Debug uncomment for testing
     Http.onreadystatechange = (e) => {
@@ -81,5 +87,6 @@
 <noscript>
     // Begin of Zi anonymous web Analytics using img counter, no IP is recorded
     // Please edit values in the URI, "testpixel" to yourprojectname and /test.html to yout pagename.
-    <img src="http://localhost:8000/view/testname/counter.png?pageid=/test.html" style="border:0" alt="">    
+    <img src="http://localhost:8000/view/testname/counter.png?pageid=/test.html&cookiedissent=true" style="border:0"
+        alt="">
 </noscript>
