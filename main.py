@@ -15,7 +15,7 @@ from pymongo.compression_support import decompress
 uuidsalt = uuid.UUID(os.getenv('uuidsecretanalytics'))
 app = FastAPI(
     title="Zi Analytics Webcounter",
-    version="1.1.41")
+    version="1.1.42")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
