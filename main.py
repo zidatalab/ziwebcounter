@@ -55,8 +55,8 @@ def analyzerequest(request:Request,pageid:str,siteid:str):
         request.headers['host'],
         request.headers['user-agent'],
         pageid,siteid,
-        request.headers['referer'],
-        request.headers['Accept-Language'])
+        request.headers.get('referer', 'test_referer'),
+        request.headers.get('Accept-Language', 'German'))
 
 # Endpoints
 @app.get("/")
