@@ -15,7 +15,7 @@ from pymongo.compression_support import decompress
 uuidsalt = uuid.UUID(os.getenv('uuidsecretanalytics'))
 app = FastAPI(
     title="Zi Analytics Webcounter",
-    version="1.1.3")
+    version="1.1.4")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -41,9 +41,9 @@ def makeuuid(ip,agent):
     '''
     return str(uuid.uuid3(uuidsalt,ip+agent))
 
-def makeanalyticsentry(ip,agent,pageid,siteid,referer):
-    entry = {'user':makeuuid(ip,agent),'siteid':siteid,'date':str(datetime.date.today())}    
-    visits={'pageid':pageid,'timestamp':datetime.datetime.utcnow(),'referer':referer}
+def makeanalyticsentry(ip,agent,pageid,siteid,referer,language):
+    entry = {'uid':makeuuid(ip,agent),'siteid':siteid,'date':str(datetime.date.today())}    
+    visits={'pageid':pageid,'time':datetime.datetime.utcnow(),'ref':referer,'lang':language}
     return entry,visits
 
 def analyzerequest(request:Request,pageid:str,siteid:str):
@@ -51,7 +51,8 @@ def analyzerequest(request:Request,pageid:str,siteid:str):
         request.headers['host'],
         request.headers['user-agent'],
         pageid,siteid,
-        request.headers['referer'])
+        request.headers['referer'],
+        request.headers['Accept-Language'])
 
 # Endpoints
 @app.get("/")
@@ -66,7 +67,9 @@ def endpointstatus():
     
 
 @app.get("/view/{siteid}/{filename}")
-def report_view(siteid:str,request: Request,response: Response, pageid:Optional[str]="none",filename:Optional[str]=""):
+def report_view(
+    siteid:str,request: Request,response: Response, 
+    pageid:Optional[str]="none",filename:Optional[str]="",cookiedissent:bool=False):
     '''
     Collects annonymous stats. If user has visited us before, the id from a stored cookie will be used. 
     Local cookie invalidates after 365 days of not visiting a site using this service.
@@ -75,9 +78,11 @@ def report_view(siteid:str,request: Request,response: Response, pageid:Optional[
         query,visit=analyzerequest(request,pageid,siteid)
         if ('uid' in request.cookies.keys()):
             print('found uid:',request.cookies['uid'])
-            query['user']=request.cookies['uid']
+            query['uid']=request.cookies['uid']
         res = collection.update_one(query,{'$push': {'visits': visit}},upsert=True)
-        response.set_cookie(key='uid',value=query['user'],samesite="None",expires=365*24*60*60, httponly=True,secure=True)
+        if not(cookiedissent):
+            response.set_cookie(key='uid',value=query['uid'],samesite="None",
+            expires=365*24*60*60, httponly=True,secure=False)
         if (filename=='counter.png'):
             return FileResponse("counter.png")
         else:
