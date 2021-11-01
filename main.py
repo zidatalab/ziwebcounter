@@ -4,6 +4,7 @@ import datetime
 from fastapi import FastAPI, Request,HTTPException,status,Response
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from typing import Optional
 from pymongo import MongoClient
@@ -24,6 +25,9 @@ app.add_middleware(
     allow_headers=["*"],
     expose_headers=["*"]
 )
+
+# Provide additional html info
+app.mount("/static", StaticFiles(directory="docs"), name="static")
 
 # connect to MongoDB
 mongodburi = os.getenv("zidburiwrite")

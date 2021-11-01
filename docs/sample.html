@@ -25,16 +25,19 @@
         style="line-height: 1.1rem;font-size: larger;color:white;background-color: lightslategrey;margin:15px;border-radius: 15px;">
         <p>
         <pre><code>
-            // Begin of Zi anonymous web Analytics script, no IP is recorded
+            // Begin of Zi anonymous web Analytics script, 
+            // no IP is recorded no external libraries are needed.
 
             &lt;script type="text/javascript"&gt;                
                 // Put your values here:
-                let trackerurl = "http://localhost:8000/view/";
-                let sitename = "testname"
+                let trackerurl = "https://analytics.ziapp.de/view/";
+                let sitename = "ziwebcounterapidocs"
+                
                 // Do not change anything below
                 let docName = window.location.pathname;
                 let _thequery = trackerurl+sitename+'/data?pageid='+docName;                
-                // Execute Request 
+                
+                // Execute the Request 
                 const Http = new XMLHttpRequest();
                 Http.open("GET", _thequery);
                 Http.withCredentials=true;
@@ -56,7 +59,7 @@
             // to yout pagename.
 
             &lt;noscript&gt;                
-                &lt;img src="http://localhost:8000/view/testpixel/counter.png?pageid="/test.html" 
+                &lt;img src="https://analytics.ziapp.de/view/testpixel/counter.png?pageid="/test.html" 
                 style="border:0" alt=""&gt;
             &lt;/noscript&gt;         
 
@@ -69,8 +72,8 @@
 
 <script type="text/javascript">
     // Put your values here:
-    let trackerurl = "http://localhost:8000/view/";
-    let sitename = "testname"
+    let trackerurl = 'https://analytics.ziapp.de/view/';
+    let sitename = "ziwebcounterapidocs"
     // Do not change anything below this line
     // ======================================
     let docName = window.location.pathname;
@@ -91,6 +94,6 @@
 <noscript>
     // Begin of Zi anonymous web Analytics using img counter, no IP is recorded
     // Please edit values in the URI, "testpixel" to yourprojectname and /test.html to yout pagename.
-    <img src="http://localhost:8000/view/testname/counter.png?pageid=/test.html&cookiedissent=true" style="border:0"
+    <img src="https://analytics.ziapp.de/view/ziwebcounterapidocs/counter.png?pageid=/static/sample.html&cookiedissent=true" style="border:0"
         alt="">
 </noscript>
