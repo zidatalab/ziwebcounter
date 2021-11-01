@@ -83,7 +83,7 @@ def report_view(
         if not(cookiedissent):
             response.set_cookie(key='uid',value=query['uid'],samesite="None",
             expires=365*24*60*60, httponly=True,secure=False)
-        else:
+        if (cookiedissent and ('uid' in request.cookies.keys())):
             response.delete_cookie('uid')
         if (filename=='counter.png'):
             return FileResponse("counter.png")

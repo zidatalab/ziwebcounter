@@ -13,8 +13,12 @@
     <p id="sendresult"></p>
     <h1>Code Snippets</h1>
     <p>
-        Javascript counter is the suggested method. As a failsafe method, an img-tag can be included in a <code>noscript</code> tag. Either way, to count on a page level, the path and name of the page or an arbitrary id needs to be included as query parameter <code>pageid</code>. Also there is an option to opt out of statistics cookie creation. 
-        This is done via <code>cookiedissent=true</code> as aditional query parameter.
+        Javascript counter is the suggested method. As a failsafe method, an img-tag can be included in a
+        <code>noscript</code> tag. Either way, to count on a page level, the path and name of the page or an arbitrary
+        id needs to be included as query parameter <code>pageid</code>. Also there is an option to opt out of statistics
+        cookie creation. This is done via <code>cookiedissent=true</code> as aditional query parameter. As a safeguard
+        measure, it is advisable to change the request option 'withCredentials' to false in the client. This prevents
+        sending and storing of cookies via a request.
     </p>
     <h3>For javascript</h3>
     <div
