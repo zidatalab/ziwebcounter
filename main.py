@@ -30,7 +30,7 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="docs"), name="static")
 
 # connect to MongoDB
-mongodburi = os.getenv("zidburiwrite")
+mongodburi = os.getenv("mongodbatlas")
 db = MongoClient(mongodburi).get_database('webtools')
 collection = db.webcounter
 
