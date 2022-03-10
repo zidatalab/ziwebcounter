@@ -3,7 +3,7 @@ services:
     test:
         environment:
           - uuidsecretanalytics
-          - zidburiwrite
+          - mongodbatlas
         build:
             context: .
             dockerfile: tests/Dockerfile
@@ -12,4 +12,4 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: zidatasciencecontainer.azurecr.io/zi/ziwebcounter:compose
+        image: zidatasciencecontainer.azurecr.io/zi/ziwebcounter:mongodbatlas
