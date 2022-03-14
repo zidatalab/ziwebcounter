@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build and run test Container
         env: 
-          zidburiwrite: ${{ secrets.zidburiwrite }}
+          mongodbatlas: ${{ secrets.mongodbatlas }}
           uuidsecretanalytics: ${{ secrets.uuidsecretanalytics }}
         run: |
           docker-compose build test
