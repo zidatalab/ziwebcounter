@@ -14,6 +14,7 @@ from pymongo.compression_support import decompress
 
 # Config
 uuidsalt = uuid.UUID(os.getenv('uuidsecretanalytics'))
+ziip = os.getenv("ziip")
 app = FastAPI(
     title="Zi Analytics Webcounter",
     version="1.1.42")
@@ -46,13 +47,29 @@ def makeuuid(ip,agent):
     return str(uuid.uuid3(uuidsalt,ip+agent))
 
 def makeanalyticsentry(ip,agent,pageid,siteid,referer,language):
-    entry = {'uid':makeuuid(ip,agent),'siteid':siteid,'date':str(datetime.date.today())}    
-    visits={'pageid':pageid,'time':datetime.datetime.utcnow(),'ref':referer,'lang':language}
+    entry = {'uid':makeuuid(ip,agent),'siteid':siteid,'date':str(datetime.date.today()), 'usergroup': get_usergroup(ip)}
+    visits={'pageid':pageid,'time':datetime.datetime.now(datetime.UTC),'ref':referer,'lang':language}
     return entry,visits
+
+def get_ip(headers):
+    ip = "unknown"
+    if headers.get("x-forwarded-for"):
+        ip = headers["x-forwarded-for"]
+    elif headers.get("x-real-ip"):
+        ip = headers["x-real-ip"]
+    return ip
+
+def get_usergroup(ip):
+    usergroup = "external"
+    if ip == ziip:
+        usergroup = "Zi"
+    elif ip == "unknown":
+        usergroup = "unknown"
+    return usergroup
 
 def analyzerequest(request:Request,pageid:str,siteid:str):
     return makeanalyticsentry(
-        request.headers['host'],
+        get_ip(request.headers),
         request.headers['user-agent'],
         pageid,siteid,
         request.headers.get('referer', 'test_referer'),
