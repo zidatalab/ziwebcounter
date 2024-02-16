@@ -4,6 +4,7 @@ services:
         environment:
           - uuidsecretanalytics
           - mongodbatlas
+          - ziip
         build:
             context: .
             dockerfile: tests/Dockerfile
@@ -12,4 +13,4 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: zidatasciencecontainer.azurecr.io/zi/ziwebcounter:mongodbatlas
+        image: swr.eu-de.otc.t-systems.com/zi_container_repositories/ziwebcounter:mongodbatlas
