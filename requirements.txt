@@ -1,6 +1,7 @@
 fastapi
-pymongo
+pymongo[srv]
 pytest
 uvicorn
 aiofiles
 requests
+httpx

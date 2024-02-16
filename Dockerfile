@@ -1,5 +1,5 @@
 # Release Docker File
-FROM python:3.9-slim
+FROM python:3-slim
 
 LABEL author="Zi Data Science Team zi@zi.de"
 LABEL name="Zi Web Counter"
