@@ -18,6 +18,7 @@ We provide sample HTML implementations using /[Sample.html](sample.html).
 ## Manual Tests
 
 `cd tests`
+
 `pytests`
 
 
@@ -27,10 +28,12 @@ For local testing, a .env file needs to be created and cocker-compose.yml needs 
 
 ## Test
 
-`docker-compose build test`
+`docker compose build test`
 
-`docker-compose run --rm test`
+`docker compose run --rm test`
 
 ## Release
 
-`docker-compose build release`
+`docker compose build release`
+
+`docker compose push release`
