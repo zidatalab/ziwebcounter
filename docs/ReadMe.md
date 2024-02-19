@@ -1,8 +1,12 @@
 # Hinweise zur Integration des Zi-Webcounter in Web-Seiten
 
-Der Webcounter kann entweder durch einen Zählpixel oder per Javascript eingebunden werden. Der Projektname sollte eindeutig sein, bitte ggf. mit der IT abesprechen.
+## Was ist das Ziel
+
+Mit dem Webcounter soll ein Organisationsweites datensparsames Webmonitoring implementiert werden.
 
 ## Wie wird das System eingebungen?
+
+Der Zi-Webcounter kann entweder durch einen Zählpixel oder per Javascript eingebunden werden. Der Projektname sollte eindeutig sein, bitte ggf. mit der IT abesprechen.
 
 ### Einbindung per Zählpixel
 
