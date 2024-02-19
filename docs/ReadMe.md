@@ -6,7 +6,7 @@ Mit dem Webcounter soll ein Organisationsweites datensparsames Webmonitoring imp
 
 ## Wie wird das System eingebungen?
 
-Der Zi-Webcounter kann entweder durch einen Zählpixel oder per Javascript eingebunden werden. Der Projektname sollte eindeutig sein, bitte ggf. mit der IT abesprechen.
+Der Zi-Webcounter kann entweder durch einen Zählpixel oder per Javascript eingebunden werden. Der Projektname sollte eindeutig sein, bitte ggf. mit der IT abesprechen. Eine [API-Dokumentation](https://analytics.api.ziapp.de/docs) ist ebenfalls verfügbar.
 
 ### Einbindung per Zählpixel
 
