@@ -10,7 +10,7 @@ Der Zi-Webcounter kann entweder durch einen Zählpixel oder per Javascript einge
 
 ### Einbindung per Zählpixel
 
-Beispiel Snippet für den Projehtnamen "**testprojekt**" und die Seite "**/static/sample.html**". 
+Beispiel Snippet für den Projektnamen "**testprojekt**" und die Seite "**/static/sample.html**". 
 
 ```html
 <img src="https://analytics.api.ziapp.de/view/testproject/counter.png?pageid=/static/sample.html&cookiedissent=true" style="border:0" alt="">
