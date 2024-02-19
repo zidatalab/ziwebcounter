@@ -47,7 +47,7 @@ Auswertbar sind die Zahl der pro Nutzer:in aufgerufenen Seiten und die Zahl der 
 Ändert sich der Browser oder die IP-Adresse wird ein neuer Nutzer gezählt. Die IP-Adresse wird nur zur erstellung des Nutzerpseudonyms verarbeitet und nicht gespeichert. Die IP-Adresse kann durch das Zi nicht im Nachhinnein rekonstruiert werden. 
 Es wird allerdings vermerkt, ob der Zugriff von einer Zi-eigenen IP-Adresse erfolgt (Ja/Nein-Flag).
 
-Exemplarische Auswertedaten:
+**Exemplarischer Auswertedatensatz**:
 ```
 uid: 4eef7ff3
 pageid: /static/sample.html
